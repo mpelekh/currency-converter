@@ -61,13 +61,14 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
           setRates((rates) => {
             const newRates = [rateData, ...rates];
 
+            // Print only last 24 hours to a page
             if (newRates.length > 24) {
               newRates.length = 24;
             }
 
             return newRates;
           });
-        }, 10000);
+        }, 1000 * 60 * 60 /* Pull  currency conversion rates every hour */);
       })
       .catch(handleError);
 
