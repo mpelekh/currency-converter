@@ -6,11 +6,13 @@ import ErrorModal from "components/ErrorModal";
 import "App.css";
 
 const App = () => {
-  const { error, rates } = useContext(ConversionRatesContext);
+  const { error, convertCurrencyFrom, convertCurrencyTo, rates } = useContext(
+    ConversionRatesContext
+  );
 
   return (
     <Container className="p-3">
-      <h1 className="header">USD / BRL Currency Conversion Rates</h1>
+      <h1 className="header">{`${convertCurrencyFrom} / ${convertCurrencyTo} Currency Conversion Rates`}</h1>
       <ConversionRatesTable rates={rates} />
       {error && <ErrorModal message={error} />}
     </Container>

@@ -4,11 +4,19 @@ import {
   ConversionRate,
 } from "services/conversionRatesService";
 
+const convertCurrencyFrom = process.env
+  .REACT_APP_CONVERT_CURRENCY_FROM as string;
+const convertCurrencyTo = process.env.REACT_APP_CONVERT_CURRENCY_TO as string;
+
 export const ConversionRatesContext = React.createContext<{
   error: string | null;
+  convertCurrencyFrom: string;
+  convertCurrencyTo: string;
   rates: ConversionRate[];
 }>({
   error: null,
+  convertCurrencyFrom,
+  convertCurrencyTo,
   rates: [],
 });
 
@@ -22,8 +30,8 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
     };
     const updateRates = async () => {
       const rateData = await ConversionRatesService.getConversionRates(
-        "USD",
-        "BRL"
+        convertCurrencyFrom,
+        convertCurrencyTo
       );
       setRates([rateData]);
     };
@@ -40,8 +48,8 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
 
           try {
             rateData = await ConversionRatesService.getConversionRates(
-              "USD",
-              "BRL"
+              convertCurrencyFrom,
+              convertCurrencyTo
             );
           } catch (error) {
             debugger;
@@ -72,6 +80,8 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
     <ConversionRatesContext.Provider
       value={{
         error,
+        convertCurrencyFrom,
+        convertCurrencyTo,
         rates,
       }}
     >
