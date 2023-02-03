@@ -25,7 +25,7 @@ interface ConversionRateResponse {
 export class ConversionRatesService {
   private static readonly baseUrl =
     "https://currency-converter5.p.rapidapi.com";
-  private static readonly apiKey = "...";
+  private static readonly apiKey = process.env.REACT_APP_CURRENCY_CONVERTER_API_KEY as string;
 
   static async getConversionRates(
     from: string,
