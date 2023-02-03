@@ -24,7 +24,7 @@ function Table<ObjectType extends { id: number }>({
       </thead>
       <tbody>
         {items.map((item) => (
-          <tr key={item.id}>
+          <tr key={item.id} data-testid="rate-row">
             {columns.map((column) => (
               <td key={column.key}>{item[column.key as string]}</td>
             ))}

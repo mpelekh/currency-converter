@@ -11,7 +11,13 @@ const ErrorModal = ({ message }: Props) => {
   const handleClose = () => setShow(false);
 
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      backdrop="static"
+      keyboard={false}
+      data-testid="error-modal"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Oops.</Modal.Title>
       </Modal.Header>

@@ -8,17 +8,20 @@ const convertCurrencyFrom = process.env
   .REACT_APP_CONVERT_CURRENCY_FROM as string;
 const convertCurrencyTo = process.env.REACT_APP_CONVERT_CURRENCY_TO as string;
 
-export const ConversionRatesContext = React.createContext<{
+export interface ConversionRatesContextValue {
   error: string | null;
   convertCurrencyFrom: string;
   convertCurrencyTo: string;
   rates: ConversionRate[];
-}>({
-  error: null,
-  convertCurrencyFrom,
-  convertCurrencyTo,
-  rates: [],
-});
+}
+
+export const ConversionRatesContext =
+  React.createContext<ConversionRatesContextValue>({
+    error: null,
+    convertCurrencyFrom,
+    convertCurrencyTo,
+    rates: [],
+  });
 
 export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
   const [rates, setRates] = useState<ConversionRate[]>([]);
