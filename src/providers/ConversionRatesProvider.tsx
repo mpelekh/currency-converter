@@ -23,7 +23,13 @@ export const ConversionRatesContext =
     rates: [],
   });
 
-export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
+export interface ConversionRatesProviderProps {
+  intervalMs?: number;
+}
+
+export const ConversionRatesProvider: FC<
+  PropsWithChildren<ConversionRatesProviderProps>
+> = ({ intervalMs, children }) => {
   const [rates, setRates] = useState<ConversionRate[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -55,7 +61,6 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
               convertCurrencyTo
             );
           } catch (error) {
-            debugger;
             handleError(error as Error);
             clearInterval(intervalRef.intervalId!);
             return;
@@ -71,7 +76,7 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
 
             return newRates;
           });
-        }, 1000 * 60 * 60 /* Pull  currency conversion rates every hour */);
+        }, intervalMs || 1000 * 60 * 60 /* Pull  currency conversion rates every hour */);
       })
       .catch(handleError);
 
@@ -89,7 +94,7 @@ export const ConversionRatesProvider: FC<PropsWithChildren> = (props) => {
         rates,
       }}
     >
-      {props.children}
+      {children}
     </ConversionRatesContext.Provider>
   );
 };
