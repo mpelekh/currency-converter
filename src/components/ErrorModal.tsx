@@ -8,7 +8,9 @@ interface Props {
 
 const ErrorModal = ({ message }: Props) => {
   const [show, setShow] = useState(true);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
 
   return (
     <Modal
