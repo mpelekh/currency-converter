@@ -57,7 +57,7 @@ export const ConversionRatesProvider: FC<
     return () => {
       subscriptionRef.unsubscribe?.();
     };
-  }, []);
+  }, [intervalMs]);
 
   return (
     <ConversionRatesContext.Provider
